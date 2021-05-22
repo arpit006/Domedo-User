@@ -10,6 +10,8 @@
 		<module>service</module>
 		<module>web</module>
 		<module>entities</module>
+		<module>validator</module>
+		<module>du-common</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
@@ -18,7 +20,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.domedo</groupId>
+	<groupId>com.domedo.domedo-user</groupId>
 	<artifactId>domedo-user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>domedo-user</name>
@@ -28,47 +30,69 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+		<!--        for distributed tracing-->
+		<!--<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+			<version>3.0.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+			<version>3.0.2</version>
+		</dependency>-->
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>com.domedo</groupId>
+			<artifactId>commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.domedo</groupId>
+			<artifactId>objects</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.domedo</groupId>
+				<groupId>com.domedo.domedo-user</groupId>
+				<artifactId>du-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.domedo.domedo-user</groupId>
 				<artifactId>dao</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.domedo</groupId>
+				<groupId>com.domedo.domedo-user</groupId>
 				<artifactId>entities</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.domedo</groupId>
+				<groupId>com.domedo.domedo-user</groupId>
 				<artifactId>generator</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.domedo</groupId>
+				<groupId>com.domedo.domedo-user</groupId>
 				<artifactId>mapper</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.domedo</groupId>
+				<groupId>com.domedo.domedo-user</groupId>
 				<artifactId>service</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.domedo</groupId>
+				<groupId>com.domedo.domedo-user</groupId>
 				<artifactId>web</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
