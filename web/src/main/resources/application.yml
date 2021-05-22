@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/domedo_user_dev
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  zipkin:
+    base-url: http://localhost:9411
+#    service:
+#      name: DOMEDO-USER-ZIPKIN
+
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+  profiles:
+    active: dev
+  application:
+    name: DOMEDO-USER
+
+server:
+  port: 8082
+
+management:
+  server:
+    port: 8082
+  endpoint:
+    info:
+      enabled: true
+    health:
+      group:
+        domedo-user:
+          include: "*"
+          show-component: always
+          show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+logging:
+  pattern:
+    level: "%5p [${spring.zipkin.service.name:${spring.application.name:}},%X{traceId:-},%X{spanId:-}] [%X{ddd:-},%X{bp:-},%X{bpids:-}] [%X{op:-},%X{chunk:-},%X{i:-}]"
+
+

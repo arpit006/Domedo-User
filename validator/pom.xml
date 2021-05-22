@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <artifactId>entities</artifactId>
+    <artifactId>validator</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,9 +20,10 @@
     <dependencies>
         <dependency>
             <groupId>com.domedo.domedo-user</groupId>
-            <artifactId>du-common</artifactId>
+            <artifactId>entities</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
 
 </project>
