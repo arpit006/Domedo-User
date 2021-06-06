@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class User extends DomedoBaseEntity {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-//    @Past(message = "Date of Birth should be a valid date before current date")
+    @Past(message = "Date of Birth should be a valid date before current date")
     @Column(name = "DATE_OF_BIRTH")
     private Date dateOfBirth;
 
@@ -50,7 +52,7 @@ public class User extends DomedoBaseEntity {
     @Column(name = "PHONE_NUMBER", nullable = false)
     private String phoneNumber;
 
-//    @Email(message = "Please enter a valid email ID")
+    @Email(message = "Please enter a valid email ID")
     @Column(name = "EMAIL")
     private String email;
 
@@ -78,13 +80,13 @@ public class User extends DomedoBaseEntity {
 
     @PrePersist
     public void prePersist() {
-        verifyAccountFullyVerified();
+//        verifyAccountFullyVerified();
         log.info("User Entity: [{}]", this.toString());
     }
 
     @PreUpdate
     public void preUpdate() {
-        verifyAccountFullyVerified();
+//        verifyAccountFullyVerified();
     }
 
     private void verifyAccountFullyVerified() {

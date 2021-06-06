@@ -1,5 +1,6 @@
 package com.domedo.domedouser.web;
 
+import com.domedo.domedouser.du_common.config.SharedNotificationServiceConfigRef;
 import com.domedo.domedouser.web.config.SharedConfigRef;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.domedo.domedouser.*")
 @EntityScan(basePackages = "com.domedo.domedouser.*")
 @ComponentScan(basePackages = {"com.domedo.domedouser.*"})
-@Import({SharedConfigRef.class})
+@Import({SharedConfigRef.class, SharedNotificationServiceConfigRef.class})
 @SpringBootApplication
 public class DomedoUserApplication {
 
