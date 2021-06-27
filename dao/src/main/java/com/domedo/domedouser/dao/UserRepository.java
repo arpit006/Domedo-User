@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface UserRepository extends IDomedoRepository<User> {
 
     Optional<User> findByPhoneNumber(String phoneNumber);
+
+    Optional<User> findByEmail(String email);
 }

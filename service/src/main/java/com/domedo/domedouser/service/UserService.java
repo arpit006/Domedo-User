@@ -14,6 +14,7 @@ import com.domedo.objects.exceptions.DomedoIntegrationException;
 import com.domedo.objects.vos.DomedoRegisterReqVo;
 import com.domedo.objects.vos.DomedoRegisterRespVo;
 import com.domedo.objects.vos.UserVo;
+import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -49,8 +50,10 @@ public class UserService extends AbstractDomedoService<User, UserVo> implements 
 
     @Override
     public DomedoRegisterRespVo verifyUser(DomedoRegisterReqVo vo) {
+        //phone number
         String phoneNumber = vo.getPhoneNumber();
         String otp = vo.getOtp();
+        //validate request
         userValidator.validateLoginOrRegister(vo);
         Optional<User> optionalUser = userRepository.findByPhoneNumber(phoneNumber);
         //validate OTP and return error in case of invalid OTP
@@ -64,9 +67,9 @@ public class UserService extends AbstractDomedoService<User, UserVo> implements 
             User persistedUser = saveUser(user);
         }
         //TODO complete this
-//        Preconditions.checkArgument(optionalUser.isPresent(), "No user exists");
-//        User user = optionalUser.get();
-//        return new DomedoRegisterRespVo("An OTP is sent to your registered mobile Number. Please enter OTP to continue", RoleType.USER, "ajkljda-dasdnakjd-addadd-12jdqdasd-das1easd");
+        Preconditions.checkArgument(optionalUser.isPresent(), "No user exists");
+        User user = optionalUser.get();
+        //TODO call oauth and generate token
         return new DomedoRegisterRespVo("OTP validated successfully", RoleType.USER, "ajkljda-dasdnakjd-addadd-12jdqdasd-das1easd");
     }
 
@@ -80,6 +83,7 @@ public class UserService extends AbstractDomedoService<User, UserVo> implements 
     @Override
     public String loginUser(DomedoRegisterReqVo vo) {
         String phoneNumber = vo.getPhoneNumber();
+        //validate request
         userValidator.validateLoginOrRegister(vo);
         //send otp to phone Number
         BaseHttpResponse response = otpRestCaller.generateOtp(OtpRequestGenerator.makeGenerateOtpRequest(phoneNumber));
