@@ -27,28 +27,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class UserController extends DomedoRestController<User, UserVo> {
 
-    //    @Autowired
     private IUserService userService;
 
-    //    @Autowired
     private UserResponseGenerator userResponseGenerator;
 
     public UserController(IUserService userService, UserResponseGenerator userResponseGenerator) {
         super(userService, userResponseGenerator);
         this.userService = userService;
         this.userResponseGenerator = userResponseGenerator;
-    }
-
-
-    @PostMapping(value = "/v2/user")
-    public ResponseEntity<TempUserResp> process(HttpServletRequest httpServletRequest) {
-        String client = httpServletRequest.getHeader("client");
-        log.info("Incoming request from " + client + " for /api/v2");
-        TempUserResp resp = new TempUserResp();
-        resp.setName("Arpit Srivastava");
-        resp.setAge(23);
-        log.info("Response prepared. " + resp);
-        return ResponseEntity.ok(resp);
     }
 
     @PostMapping(value = "/verify", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -61,12 +47,5 @@ public class UserController extends DomedoRestController<User, UserVo> {
     public ResponseEntity<?> loginUser(@RequestBody DomedoRegisterReqVo vo) {
         String response = userService.loginUser(vo);
         return ResponseEntity.ok().body(response);
-    }
-
-    @Data
-    @ToString
-    class TempUserResp {
-        String name;
-        int age;
     }
 }
